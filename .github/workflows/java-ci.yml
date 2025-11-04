@@ -1,0 +1,39 @@
+name: Java CI - Run JUnit Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:   # allows manual run from Actions tab
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout repository code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Java 17 (you can change version)
+      - name: Set up JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      # Step 3: Download JUnit standalone jar (so you don’t need to upload lib/)
+      - name: Download JUnit Platform Console Jar
+        run: |
+          mkdir -p lib
+          curl -L -o lib/junit-platform-console-standalone-1.10.2.jar \
+          https://repo1.maven.org/maven2/org/junit/platform/junit-platform-console-standalone/1.10.2/junit-platform-console-standalone-1.10.2.jar
+
+      # Step 4: Compile Java code
+      - name: Compile Java files
+        run: javac -cp .:lib/junit-platform-console-standalone-1.10.2.jar *.java
+
+      # Step 5: Run JUnit tests
+      - name: Run JUnit tests
+        run: java -jar lib/junit-platform-console-standalone-1.10.2.jar --class-path . --scan-class-path
