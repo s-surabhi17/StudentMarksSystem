@@ -1,24 +1,28 @@
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class IntegrationTest {
+public class IntegrationTest 
+{
 
     @Test
-    void testStudentModule() {
+    void testStudentModule() 
+    {
         StudentModule s = new StudentModule(1, "Alex");
         assertEquals(1, s.getStudentId());
         assertEquals("Alex", s.getStudentName());
     }
 
     @Test
-    void testMarksModule() {
+    void testMarksModule() 
+    {
         MarksModule m = new MarksModule(80, 70, 90);
         assertEquals(240, m.totalMarks());
         assertEquals(80.0, m.averageMarks(), 0.01);
     }
 
     @Test
-    void testResultModule() {
+    void testResultModule() 
+    {
         ResultModule r = new ResultModule();
         assertEquals("A+", r.calculateGrade(95));
         assertEquals("A", r.calculateGrade(80));
@@ -26,7 +30,8 @@ public class IntegrationTest {
     }
 
     @Test
-    void testIntegrationFlow() {
+    void testIntegrationFlow() 
+    {
         StudentModule s = new StudentModule(1, "Alex");
         MarksModule m = new MarksModule(80, 70, 90);
         ResultModule r = new ResultModule();
@@ -38,5 +43,6 @@ public class IntegrationTest {
         assertEquals("A", grade);
     }
 }
+
 
 
