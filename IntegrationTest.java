@@ -25,10 +25,11 @@
  StudentModule s = new StudentModule(1, "Alex");
  MarksModule m = new MarksModule(80, 70, 90);
  ResultModule r = new ResultModule();
- 3
-double avg = m.averageMarks();
+
+ double avg = m.averageMarks();
  String grade = r.calculateGrade(avg);
  assertEquals(80.0, avg, 0.01);
  assertEquals("A", grade);
  }
  }
+
